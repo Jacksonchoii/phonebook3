@@ -65,13 +65,53 @@ public class PhoneController {
 		return "redirect:/phone/list";
 	}
 	
-	
 	//수정폼 --> modifyForm
-	
+	@RequestMapping(value = "/modifyForm", method = {RequestMethod.GET, RequestMethod.POST})
+	public String modifyForm(Model model, @RequestParam("id") int personId) { //일단은 되는데 저렇게 쓰는게 맞나 확인
+		System.out.println("modifyForm");
+		
+		//id로 정보 가져오기
+		PhoneDao phoneDao = new PhoneDao();
+		PersonVo personVo = phoneDao.getPerson(personId);
+		
+		//model로 보내줌 personVo를 -->model
+		model.addAttribute("pvo", personVo);
+		
+		//포워드
+		return "/WEB-INF/views/modifyForm.jsp";
+	}
+
 	//수정 --> modify
+	@RequestMapping(value = "/modify", method = {RequestMethod.GET, RequestMethod.POST})
+	public String modify(@RequestParam("name") String name,
+						 @RequestParam("hp") String hp,
+						 @RequestParam("company") String company,
+						 @RequestParam("id") int personId) {
+							
+		System.out.println("modify");
+		
+		//Vo 묶고
+		PersonVo personVo = new PersonVo(personId, name, hp, company);
+		System.out.println(personVo.toString());
+		
+		//Dao
+		PhoneDao phoneDao = new PhoneDao();
+		phoneDao.personUpdate(personVo);
+		
+		return "redirect:/phone/list";
+	}
 	
 	//삭제 --> delete
-	
+	@RequestMapping(value = "/delete", method = {RequestMethod.GET, RequestMethod.POST})
+	public String delete(@RequestParam("id") int personId) {
+		System.out.println("delete");
+		
+		//dao
+		PhoneDao phoneDao = new PhoneDao();
+		phoneDao.personDelete(personId);
+		
+		return "redirect:/phone/list";
+	}
 
 	
 }
