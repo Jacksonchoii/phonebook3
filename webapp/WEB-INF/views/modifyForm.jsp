@@ -17,10 +17,10 @@
 	</p>
 	
 	<form action="/phonebook3/phone/modify" method="get">
-		이름(name): <input type="text" name="name" value="${pvo.name}"><br> <!-- requestScope.pvo.name -->
-		핸드폰(hp): <input type="text" name="hp" value="${pvo.hp}"><br>
-		회사(company): <input type="text" name="company" value="${pvo.company}"><br><%-- ${pvo.company} --%>
-		코드(id): <input type="text" name="id" value="${pvo.personId}"><br> <%-- "${pvo.personId}" --%>
+		이름(name): <input type="text" name="name" value="${personVo.name}"><br> <!-- requestScope.personVo.name -->
+		핸드폰(hp): <input type="text" name="hp" value="${personVo.hp}"><br>
+		회사(company): <input type="text" name="company" value="${personVo.company}"><br> 
+		코드(id): <input type="text" name="personId" value="${personVo.personId}"><br> 
 		<button type="submit">수정</button>
 	</form>
 	
